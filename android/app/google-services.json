@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "425598736212",
+    "project_id": "gardencontrol-603b7",
+    "storage_bucket": "gardencontrol-603b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425598736212:android:2558fff389c7b6cd275ac1",
+        "android_client_info": {
+          "package_name": "pl.garden.garden_control"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChhQrvqHdKxPVeXvFuRhd9S5r_tT31NAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
