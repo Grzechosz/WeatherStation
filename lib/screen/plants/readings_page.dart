@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:garden_control/service/reading_service.dart';
+import 'package:garden_control/service/sensor_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/plant.dart';
@@ -28,30 +29,49 @@ class ReadingPage extends HookWidget {
         toolbarHeight: 75,
         backgroundColor: Colors.transparent,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                image: DecorationImage(fit: BoxFit.cover, image: image),
-                borderRadius: const BorderRadius.all(Radius.circular(90)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 4,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(fit: BoxFit.cover, image: image),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(90)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      plant.name,
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                )
+              ],
             ),
-            const SizedBox(
-              width: 20,
-            ),
-            Text(
-              plant.name,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
+            Column(
+              children: [
+                IconButton(onPressed: () => _deleteOrEdit(context),
+                    icon: const Icon(Icons.delete_forever,
+                    size: 35,
+                    color: Colors.red,))
+              ],
+            )
           ],
         ),
       ),
@@ -255,5 +275,40 @@ class ReadingPage extends HookWidget {
     } else {
       return 5;
     }
+  }
+
+  void _deleteOrEdit(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              "Usuwanie odczytów jest nieodwracalne",
+              style: TextStyle(fontSize: 18),
+            ),
+            actions: [
+              TextButton(
+                child: const Text(
+                  "Anuluj",
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                onPressed: () 
+                {
+                  SensorService().deleteReadings(plant.sensorId);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Usuń",
+                  style: TextStyle(color: Colors.red, fontSize: 16),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

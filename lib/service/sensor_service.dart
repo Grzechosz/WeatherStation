@@ -32,4 +32,23 @@ class SensorService {
         .update(
             sensor.toMap());
   }
+
+  Future<void> deleteReadings(String sensorId, {int batchSize = 100}) async {
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+    QuerySnapshot querySnapshot = await sensorCollection!
+        .doc(sensorId)
+        .collection('readings')
+        .limit(batchSize)
+        .get();
+
+    for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+      batch.delete(doc.reference);
+    }
+
+    await batch.commit();
+
+    if (querySnapshot.docs.length == batchSize) {
+      await deleteReadings(sensorId, batchSize: batchSize);
+    }
+  }
 }
