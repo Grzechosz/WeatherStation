@@ -127,6 +127,8 @@ void loop() {
 
 
 ## Wykorzystane czujniki
+
+
 Rezystencyjny czujnik światła – przedstawiony na rysunku 1. wyposażony w 4 wyprowadzenia:
   VCC – napięcie zasilania z zakresu: 3.3V do 5V 
   GND – masa układu
@@ -134,6 +136,7 @@ Rezystencyjny czujnik światła – przedstawiony na rysunku 1. wyposażony w 4 
   AO – wyjście analogowe
 
 ![light sensor](https://github.com/Burakmeister/GardenControl/blob/master/light_sensor.png?raw=true)
+
 Rysunek 1. Rezystencyjny czujnik światła
 
 
@@ -144,6 +147,7 @@ Czujnik temperatury i wilgotności DHT11 – przedstawiony na rysunku 2. wyposa�
   DATA – wyjście cyfrowe
 
 ![temperature and humadity sensor](https://github.com/Burakmeister/GardenControl/blob/master/temperature_sensor.png?raw=true)
+
 Rysunek 2. Czujnik temperatury i wilgotności
 
 
@@ -156,25 +160,35 @@ Czujnik wilgotności gleby – przedstawiony na rysunku 3., z podłączoną sond
   Pozostałe 2 wyprowadzenia służące do połączenia z sondą
 
 ![soil moisture sensor](https://github.com/Burakmeister/GardenControl/blob/master/soil_moisture_sensor.png?raw=true)
+
 Rysunek 3. Czujnik wilgotności gleby
 
 ![probe](https://github.com/Burakmeister/GardenControl/blob/master/probe.png?raw=true)
+
 Rysunek 4. Sonda do pomiaru wilgotności gleby
 
 
 
 # Aplikacja mobilna
+
+
 ## Opis
 Aplikacja mobilna zaprojektowana została do monitorowania warunków roślin w czasie rzeczywistym. Wyświetla odczyty z czujników w postac interaktywnych wykresów. Pozwala przeglądać dane historyczne, aby śledzić zmiany w czasie. Intuicyjne przyciski umożliwiają szybkie przełączanie się między parametrami pomiarowymi. Daje również możliwość dodawania nowych roślin wraz z ich zdjęciami.
+
 
 ## Prezentacja
 Rysunek 5. prezentuje widok listy roślin (po lewej stronie), zawierający kafelki prezentujące zdjęcia oraz nazwy. Na dole znajduje się przycisk Add, przenoszący do strony umożliwiającej dodanie do bazy danych nowej rośliny (po prawej stronie), przytrzymując kafelek można ją usunąć. Po wybraniu interesującego nas kwiatka, przechodzimy do odczytów z czujników (Rysunek 6.). Na tym widoku widnieją przyciski z informacją o ostatnim odczycie, służące do przełączania wykresów. W prawym górnym rogu ekranu znajduje się przycisk umożliwiający usunięcie historii odczytów z bazy danych.
 
+
 ![plants page and adding page](https://github.com/Burakmeister/GardenControl/blob/master/list_and_adding.png?raw=true)
+
 Rysunek 5. Lista i opcja dodawania roślin
 
+
 ![readings page](https://github.com/Burakmeister/GardenControl/blob/master/readings_page.png?raw=true)
+
 Rysunek 6. Odczyty z czujników
+
 
 # Wnioski
 ## Trudności
