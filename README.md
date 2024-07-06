@@ -11,54 +11,65 @@ Projekt polegał na stworzeniu systemu monitorującego warunki środowiskowe, po
 ## Raspberry Pi
 Głównym zadaniem Raspberry Pi w projekcie było pełnienie funkcji Access Pointa, do którego łączyły się poszczególne mikrokontrolery. Komunikacja między ESP32, a Raspberry Pi odbywała się z użyciem Protocol Buffers. Kod źródłowy 1. przedstawia realizację serwera komunikacyjnego w języku Python. Dane zebrane z czujników przesyłane są do chmurowej bazy danych, używając połączenia przewodowego.
 
-##ESP32
+## ESP32
 Mikrokontrolery ESP32 służyły analizie danych przesłanych z czujników i przekształcenie ich do docelowej formy. Łączyły się one do Access Pointa, następnie dane przesyłane były co 30 minut do serwera na Raspberry Pi. Kod źródłowy 2. przedstawia realizację tych zadań.
 
 Kod źródłowy 1. Kod z Raspberry Pi
-
 ```python
-import socket import protocol_pb2
+import socket
+import protocol_pb2
 import firebase_admin
-from google.cloud import firestore from firebase_admin import credentials from datetime import datetime
+from google.cloud import firestore
+from firebase_admin import credentials
+from datetime import datetime
 import os
 
-
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "key.json"
-cred = credentials.Certificate("key.json") firebase_admin.initialize_app(cred)
+
+cred = credentials.Certificate("key.json")
+firebase_admin.initialize_app(cred)
 db = firestore.Client()
-collection = db.collection("sensors") sensors = collection.get()
+collection = db.collection("sensors")
+sensors = collection.get()
+
 server_address = ('0.0.0.0', 8080)
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) server_socket.bind(server_address)
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind(server_address)
 server_socket.listen(2)
-print("Waiting for ESP32 to connect...") while True:
-client_socket, client_address = server_socket.accept()
-print("ESP32 device connected:", client_address)
 
+print("Waiting for ESP32 to connect...")
 
+while True:
+  client_socket, client_address = server_socket.accept()
+  print("ESP32 device connected:", client_address)
 
-
-1),
-
-
-1),
-received_data = client_socket.recv(1024) if received_data:
-sensor_data = protocol_pb2.SensorData() sensor_data.ParseFromString(received_data) new_reading = {
-"temperature": round(sensor_data.temperature,
-"light": sensor_data.percentLight, "soil_moisture": sensor_data.percentMoisture, "humidity": round(sensor_data.percentHumidity,
-
-
-"time": datetime.now()
-}
-doc = collection.document(str(sensor_data.id)) if doc.get().exists:
-doc.collection("readings").document(str(datetime.timestamp(datetime.now(
-)))).set(new_reading)
-client_socket.close() server_socket.close()
+  received_data = client_socket.recv(1024)
+  if received_data:
+    sensor_data = protocol_pb2.SensorData()
+    sensor_data.ParseFromString(received_data)
+    new_reading = {
+      "temperature": round(sensor_data.temperature, 1),
+      "light": sensor_data.percentLight,
+      "soil_moisture": sensor_data.percentMoisture,
+      "humidity": round(sensor_data.percentHumidity, 1)
+      "time": datetime.now()
+    }
+  doc = collection.document(str(sensor_data.id))
+  if doc.get().exists:
+    doc.collection("readings").document(str(datetime.timestamp(datetime.now()))).set(new_reading)
+    client_socket.close()
+server_socket.close()
 ```
 
 
 Kod źródłowy 2. Kod z ESP32
 ```C
-#include <WiFi.h> #include "pb_common.h" #include "pb.h" #include "pb_encode.h" #include "protocol.pb.h" #include <DHT.h>
+#include <WiFi.h>
+#include "pb_common.h"
+#include "pb.h"
+#include "pb_encode.h"
+#include "protocol.pb.h"
+#include <DHT.h>
 
 #define DHT_SENSOR_PIN 23 #define DHT_SENSOR_TYPE DHT11
 
