@@ -5,21 +5,18 @@
 Projekt polegał na stworzeniu systemu monitorującego warunki środowiskowe, pomagające utrzymać rośliny w dobrej kondycji. System składa się z Raspberry Pi pełniącego rolę Access Pointa, który zbiera dane z dwóch ESP32, a następnie wysyła je do chmurowej bazy danych. Mikrokontrolery odczytują parametry środowiska za pomocą sensorów: czujnika wilgotności gleby, wilgotności otoczenia, temperatury oraz światła. Komunikacja między węzłami realizowana jest za pomocą Protocol Buffers. Zebrane dane mogą być wizualizowane z wykorzystaniem aplikacji mobilnej. Funkcję bazy danych pełni Firebase, przy wykorzystaniu usług Firestore (baza danych NOSQL) i Storage (przechowywanie zdjęć roślin).
 
 ## Uproszczona architektura systemu:
-![alt text](https://github.com/Burakmeister/GardenControl/blob/main/architecture.jpg?raw=true)
+![architecture](https://github.com/Burakmeister/GardenControl/blob/master/architecture.png?raw=true)
 
 # Zastosowane urządzenia oraz kody źródłowe
 ## Raspberry Pi
 Głównym zadaniem Raspberry Pi w projekcie było pełnienie funkcji Access Pointa, do którego łączyły się poszczególne mikrokontrolery. Komunikacja między ESP32, a Raspberry Pi odbywała się z użyciem Protocol Buffers. Kod źródłowy 1. przedstawia realizację serwera komunikacyjnego w języku Python. Dane zebrane z czujników przesyłane są do chmurowej bazy danych, używając połączenia przewodowego.
 
-
-
 ##ESP32
-Mikrokontrolery ESP32 służyły analizie danych przesłanych z czujników i przekształcenie ich do docelowej formy. Łączyły się one do Access Pointa,
-
-następnie dane przesyłane były co 30 minut do serwera na Raspberry Pi. Kod źródłowy 2. przedstawia realizację tych zadań.
+Mikrokontrolery ESP32 służyły analizie danych przesłanych z czujników i przekształcenie ich do docelowej formy. Łączyły się one do Access Pointa, następnie dane przesyłane były co 30 minut do serwera na Raspberry Pi. Kod źródłowy 2. przedstawia realizację tych zadań.
 
 Kod źródłowy 1. Kod z Raspberry Pi
 
+```python
 import socket import protocol_pb2
 import firebase_admin
 from google.cloud import firestore from firebase_admin import credentials from datetime import datetime
@@ -56,8 +53,11 @@ doc = collection.document(str(sensor_data.id)) if doc.get().exists:
 doc.collection("readings").document(str(datetime.timestamp(datetime.now(
 )))).set(new_reading)
 client_socket.close() server_socket.close()
-Kod źródłowy 2. Kod z ESP32
+```
 
+
+Kod źródłowy 2. Kod z ESP32
+```C
 #include <WiFi.h> #include "pb_common.h" #include "pb.h" #include "pb_encode.h" #include "protocol.pb.h" #include <DHT.h>
 
 #define DHT_SENSOR_PIN 23 #define DHT_SENSOR_TYPE DHT11
@@ -139,7 +139,7 @@ sendSensorData(tempC, humi, percentLight, percentMoisture); delay(1800000); // P
 pomiarów
 
 }
-
+```
 
 
 Wykorzystane czujniki
