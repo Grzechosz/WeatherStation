@@ -7,7 +7,10 @@ Projekt polegał na stworzeniu systemu monitorującego warunki środowiskowe, po
 ## Uproszczona architektura systemu:
 ![architecture](https://github.com/Burakmeister/GardenControl/blob/master/architecture.png?raw=true)
 
+
 # Zastosowane urządzenia oraz kody źródłowe
+
+
 ## Raspberry Pi
 Głównym zadaniem Raspberry Pi w projekcie było pełnienie funkcji Access Pointa, do którego łączyły się poszczególne mikrokontrolery. Komunikacja między ESP32, a Raspberry Pi odbywała się z użyciem Protocol Buffers. Kod źródłowy 1. przedstawia realizację serwera komunikacyjnego w języku Python. Dane zebrane z czujników przesyłane są do chmurowej bazy danych, używając połączenia przewodowego.
 
@@ -162,6 +165,8 @@ Czujnik wilgotności gleby – przedstawiony na rysunku 3., z podłączoną sond
 ![soil moisture sensor](https://github.com/Burakmeister/GardenControl/blob/master/soil_moisture_sensor.png?raw=true)
 
 Rysunek 3. Czujnik wilgotności gleby
+
+
 
 ![probe](https://github.com/Burakmeister/GardenControl/blob/master/probe.png?raw=true)
 
