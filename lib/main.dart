@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:garden_control/screen/plants/plants_page.dart';
+import 'package:weather_station/screen/main_page.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -19,12 +19,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 170, 220, 240)),
         useMaterial3: true,
+        fontFamily: 'ComicSans'
       ),
-      home: const PlantsPage(),
+      home: const MainPage(),
     );
   }
 }
-
-

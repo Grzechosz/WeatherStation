@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:garden_control/model/reading.dart';
+
+import '../model/reading.dart';
 
 
 class ReadingService {
-  final String sensorId;
   CollectionReference? sensorCollection =
-  FirebaseFirestore.instance.collection('sensors');
+  FirebaseFirestore.instance.collection('weather-data');
   static bool isLoaded = false;
-  ReadingService({required this.sensorId});
+  ReadingService();
 
   get readings {
     isLoaded = false;
-    return sensorCollection!.doc(sensorId).collection('readings').snapshots().map((snapshot) => _readingsFromSnapshot(snapshot));
+    return sensorCollection!.snapshots().map((snapshot) => _readingsFromSnapshot(snapshot));
   }
 
   List<Reading> _readingsFromSnapshot(QuerySnapshot snapshot) {

@@ -53,11 +53,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyChhQrvqHdKxPVeXvFuRhd9S5r_tT31NAU',
-    appId: '1:425598736212:android:2558fff389c7b6cd275ac1',
-    messagingSenderId: '425598736212',
-    projectId: 'gardencontrol-603b7',
-    storageBucket: 'gardencontrol-603b7.appspot.com',
+    apiKey: 'AIzaSyDBQdJXUZ1DfXb2tI43UNjyoLsdgMf_yHs',
+    appId: '1:645775703559:android:6a1e98b41cdc1b29dd74a2',
+    messagingSenderId: '645775703559',
+    projectId: 'weatherstation-d54a6',
+    storageBucket: 'weatherstation-d54a6.firebasestorage.app',
   );
 
 }

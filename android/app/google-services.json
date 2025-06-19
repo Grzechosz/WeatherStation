@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "425598736212",
-    "project_id": "gardencontrol-603b7",
-    "storage_bucket": "gardencontrol-603b7.appspot.com"
+    "project_number": "645775703559",
+    "project_id": "weatherstation-d54a6",
+    "storage_bucket": "weatherstation-d54a6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:425598736212:android:2558fff389c7b6cd275ac1",
+        "mobilesdk_app_id": "1:645775703559:android:a17ba23611d9bd7cdd74a2",
+        "android_client_info": {
+          "package_name": "com.barszczanska.weather_station"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBQdJXUZ1DfXb2tI43UNjyoLsdgMf_yHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645775703559:android:6a1e98b41cdc1b29dd74a2",
         "android_client_info": {
           "package_name": "pl.garden.garden_control"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyChhQrvqHdKxPVeXvFuRhd9S5r_tT31NAU"
+          "current_key": "AIzaSyDBQdJXUZ1DfXb2tI43UNjyoLsdgMf_yHs"
         }
       ],
       "services": {
