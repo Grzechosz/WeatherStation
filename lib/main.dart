@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 170, 220, 240)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 170, 220, 240)),
         useMaterial3: true,
         fontFamily: 'ComicSans'
       ),

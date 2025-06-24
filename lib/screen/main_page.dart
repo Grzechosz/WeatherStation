@@ -11,9 +11,9 @@ class MainPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 170, 220, 240),
+      backgroundColor: const Color.fromARGB(255, 170, 220, 240),
       body: Padding(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,32 +29,37 @@ class MainPage extends HookWidget {
               ),
             ),
             const SizedBox(height: 10),
-            StreamBuilder<List<Reading>>(
-              stream: ReadingService().readings,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(
-                    child: SpinKitSquareCircle(color: Color.fromARGB(255, 15, 65, 100), size: 100),
-                  );
-                }
-                final readings = snapshot.data!;
-                if (readings.isEmpty) {
-                  return Container(
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "Brak danych",
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w800,
+            Expanded(
+              child: StreamBuilder<List<Reading>>(
+                stream: ReadingService().readings,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: SpinKitSquareCircle(
                         color: Color.fromARGB(255, 15, 65, 100),
+                        size: 50,
                       ),
-                    ),
-                  ) ;
-                }
-                final latest = readings.last;
-                return Expanded(child: ReadingCard(reading: latest));
-              },
+                    );
+                  }
+                  final readings = snapshot.data!;
+                  if (readings.isEmpty) {
+                    return const Center(
+                      child: Text(
+                        "Brak danych",
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.w800,
+                          color: Color.fromARGB(255, 15, 65, 100),
+                        ),
+                      ),
+                    );
+                  }
+                  final latest = readings.last;
+                  return ReadingCard(reading: latest);
+                },
+              ),
             ),
+
           ],
         ),
       ),

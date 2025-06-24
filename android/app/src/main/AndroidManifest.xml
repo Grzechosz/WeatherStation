@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="garden_control"
+        android:label="Stacja Pogodowa"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
