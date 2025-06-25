@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_station/screen/variables/curiosity_page.dart';
+import 'package:weather_station/screen/variables/forecast_page.dart';
 import 'package:weather_station/screen/variables/readings_page.dart';
 import 'package:weather_station/service/forecast_service.dart';
 
@@ -35,11 +36,7 @@ class ReadingCard extends HookWidget {
             'Temperatura na zewnątrz',
             '${reading.temperatureOutside.toStringAsFixed(0)}°C',
             () => _navigateToSensor(
-                context, ReadingChartPage(
-                dataType: 'temperatureOutside',
-                title: 'Temperatura na zewnątrz',
-              styleColor: Colors.white,
-              unit: '°C',)
+                context, ForecastPage()
             ),
           ),
           const SizedBox(height: 10),
@@ -297,7 +294,7 @@ class ReadingCard extends HookWidget {
           return 'assets/images/blank.png';
       }
     }
-    return 'assets/images/blank.png';
+    return 'assets/icons/sun.png';
   }
 
 }

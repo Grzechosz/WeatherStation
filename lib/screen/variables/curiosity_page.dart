@@ -243,7 +243,7 @@ class CuriosityPage extends HookWidget {
         child: AspectRatio(
           aspectRatio: MediaQuery.of(context).orientation
               == Orientation.portrait
-              ? 0.8 : 2.8,
+              ? 0.7 : 2.8,
           child: Container(
             margin: MediaQuery.of(context).orientation
                 == Orientation.portrait
@@ -284,7 +284,7 @@ class CuriosityPage extends HookWidget {
                   child: Container(
                     padding: EdgeInsetsGeometry.all(20),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(120, 255, 255, 255),
+                      color: Color.fromARGB(220, 255, 255, 255),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(

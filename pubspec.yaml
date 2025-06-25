@@ -45,6 +45,7 @@ dependencies:
   fl_chart: ^1.0.0
   win32: ^5.14.0
   weather: ^3.2.1
+  intl: ^0.18.0
 
 dependency_overrides:
   flutter_plugin_android_lifecycle: ^2.0.28

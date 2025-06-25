@@ -78,9 +78,6 @@ class ReadingChartPage extends HookWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
                 Container(
                   margin: MediaQuery.of(context).orientation
                       == Orientation.portrait
@@ -113,6 +110,16 @@ class ReadingChartPage extends HookWidget {
                     ),
                     child: Column(
                       children: [
+                        Text(
+                          'W tej chwili',
+                          style:
+                          TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 15, 65, 100)
+                          ),
+                        ),
+                          SizedBox(height: 10,),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -139,18 +146,6 @@ class ReadingChartPage extends HookWidget {
                               )
                             ],
                           ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'W tej chwili',
-                          style:
-                          TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(255, 15, 65, 100)
-                          ),
-                        )
                       ],
                     ),
                   ),
@@ -277,17 +272,17 @@ class ReadingChartPage extends HookWidget {
     final readings = Provider.of<List<Reading>>(context);
 
     switch (dataType) {
-      case 'temperatureInside': 
+      case 'temperatureInside':
         return readings.isNotEmpty ? readings.last.temperatureInside.toInt() : 0;
       case 'temperatureOutside':
         return readings.isNotEmpty ? readings.last.temperatureOutside.toInt() : 0;
-      case 'humidity':        
+      case 'humidity':
         return readings.isNotEmpty ? readings.last.humidity.toInt() : 0;
-      case 'light':        
+      case 'light':
         return readings.isNotEmpty ? readings.last.light.toInt() : 0;
-      case 'pressure':        
+      case 'pressure':
         return readings.isNotEmpty ? (readings.last.pressure/100).toInt() : 0;
-      case 'co':        
+      case 'co':
         return readings.isNotEmpty ? readings.last.co.toInt() : 0;
     }
     return 0;
@@ -295,9 +290,9 @@ class ReadingChartPage extends HookWidget {
 
   String _formatWithSuffix(int value) {
     if (value >= 1000000) {
-      return "${(value / 1000000).toStringAsFixed(1)}M";
+      return "${(value / 1000000).toInt().toStringAsFixed(1)}M";
     } else if (value >= 1000) {
-      return "${(value / 1000).toStringAsFixed(1)}K";
+      return "${(value / 1000).toInt().toStringAsFixed(1)}K";
     } else {
       return value.toString();
     }
